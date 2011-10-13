@@ -32,15 +32,8 @@
 # Dumps an MYSQL database to a compressed file and optionaly sends it with scp to a remote server.
 # Web: https://github.com/jryberg/MySQLbackup-ng
 
-#  git init
-#  touch README
-#  git add README
-#  git commit -m 'first commit'
-#  git remote add origin git@github.com:jryberg/MySQLbackup-ng.git
-#  git push -u origin master
-
 appname=`basename $0`
-version="2.0"
+version="2.0-beta 1"
 #
 # Set some defaults
 # ssh
