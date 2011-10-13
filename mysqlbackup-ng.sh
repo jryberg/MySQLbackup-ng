@@ -29,7 +29,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # MySQLbackup-ng
-# Dumps an MYSQL database to a compressed file and optionaly sends it with scp to a remote server.
+# Dumps a MYSQL database to a compressed file and optionally sends it with scp to a remote server.
 # Web: https://github.com/jryberg/MySQLbackup-ng
 
 appname=`basename $0`
