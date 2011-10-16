@@ -60,10 +60,12 @@ compress_ext="gz"
 # Function to do the dump
 #
 function_do_dump () {
+	
         $verbose && echo "Dumping to ${dumpfile}"
 
         if [ -z "${database}" ]; then
-                if (mysqldump --all-databases -u${username} -p${password} > ${tempfile}); then
+                mysqldump --all-databases -u${username} -p${password} > ${tempfile}
+		if [ $? = 0 ]; then
 			if [ "${compress_ext}" != "" ]; then
 				cat ${tempfile} | ${compress_app} > ${dumpfile}
 			else
@@ -75,7 +77,8 @@ function_do_dump () {
 			exit 1
 		fi
         else
-                if (mysqldump ${database} -u${username} -p${password} > ${tempfile}); then
+                mysqldump ${database} -u${username} -p${password} > ${tempfile}
+		if [ $? = 0 ]; then
                        if [ "${compress_ext}" != "" ]; then
                                 cat ${tempfile} | ${compress_app} > ${dumpfile}
                         else
@@ -93,8 +96,17 @@ function_do_dump () {
                 $verbose && echo "Sending dump with scp to ${destfile}"
                 if [ "${identity}" = "" ]; then
                         scp ${sshopts} ${dumpfile} ${destfile}
+			if [ $? != 0 ]; then
+		                rm -f ${dumpfile}
+				return 1
+			fi
+	
                 else
                         scp ${sshopts} -i ${identity} ${dumpfile} ${destfile}
+			if [ $? != 0 ]; then
+		                rm -f ${dumpfile}
+				return 1
+			fi
                 fi
                 rm -f ${dumpfile}
         fi
