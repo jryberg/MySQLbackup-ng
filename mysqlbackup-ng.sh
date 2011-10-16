@@ -68,13 +68,17 @@ function_do_dump () {
 		if [ $? = 0 ]; then
 			if [ "${compress_ext}" != "" ]; then
 				cat ${tempfile} | ${compress_app} > ${dumpfile}
+				if [ $? != 0 ]
+					rm -f ${tempfile}
+					return 1
+				fi
 			else
 				mv -f ${tempfile} ${dumpfile}	
 			fi
 			rm -f ${tempfile}
 		else
 			rm -f ${tempfile}
-			exit 1
+			return 1
 		fi
         else
                 mysqldump ${database} -u${username} -p${password} > ${tempfile}
@@ -87,7 +91,7 @@ function_do_dump () {
 			rm -f ${tempfile}
                 else
                         rm -f ${tempfile}
-                        exit 1
+			return 1
                 fi
         fi
 
