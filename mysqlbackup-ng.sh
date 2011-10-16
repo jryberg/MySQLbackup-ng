@@ -68,7 +68,7 @@ function_do_dump () {
 		if [ $? = 0 ]; then
 			if [ "${compress_ext}" != "" ]; then
 				cat ${tempfile} | ${compress_app} > ${dumpfile}
-				if [ $? != 0 ]
+				if [ $? != 0 ]; then
 					rm -f ${tempfile}
 					return 1
 				fi
