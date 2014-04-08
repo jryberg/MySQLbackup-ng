@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (c) 2011, Johan Ryberg
+# Copyright (c) 2014, Johan Ryberg
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
 # Web: https://github.com/jryberg/MySQLbackup-ng
 
 appname=`basename $0`
-version="2.0-beta 1"
+version="2.0"
 #
 # Set some defaults
 # ssh
